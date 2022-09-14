@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import axios from "axios";
+import Interface from "./components/Interface";
+import { connect } from "react-redux";
+import { UPDATE_PRODUCTS } from "./redux/types";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  async componentDidMount() {
+    try {
+      const result = await axios.get("https://fakestoreapi.com/products");
+      this.props.dispatch({ type: UPDATE_PRODUCTS, payload: result.data });
+    } catch (error) {
+      console.log("API Error!", error);
+    }
+  }
+
+  render() {
+    const { products } = this.props;
+
+    if (products) {
+      return <Interface products={products} />;
+    }
+
+    return <p>Loading...</p>;
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { products: state.products };
+};
+
+export default connect(mapStateToProps)(App);
