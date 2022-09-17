@@ -1,25 +1,25 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { DELETE_FROM_CART, UPDATE_CART } from "../../redux/types";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { UPDATE_CART } from "../../redux/types";
 
-class ShoppingCartItem extends Component {
-  render() {
-    return (
-      <>
-        <p>{this.props.item.details.title}</p>
-        <button
-          onClick={() =>
-            this.props.dispatch({
-              type: UPDATE_CART,
-              payload: { id: this.props.item.id, qty: -1 },
-            })
-          }
-        >
-          Delete
-        </button>
-      </>
-    );
-  }
-}
+const ShoppingCartItem = (props) => {
+  const dispatch = useDispatch();
 
-export default connect()(ShoppingCartItem);
+  return (
+    <>
+      <p>{props.item.details.title}</p>
+      <button
+        onClick={() =>
+          dispatch({
+            type: UPDATE_CART,
+            payload: { id: props.item.id, qty: -1 },
+          })
+        }
+      >
+        Delete
+      </button>
+    </>
+  );
+};
+
+export default ShoppingCartItem;

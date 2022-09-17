@@ -1,11 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Buttons extends Component {
-  render() {
-    const { id, onBuyNow } = this.props;
-
-    return <button onClick={() => onBuyNow(id)}>Buy Now</button>;
-  }
-}
+const Buttons = (props) => {
+  const { id, onBuyNow } = props;
+  return <button onClick={() => onBuyNow(id)}>Buy Now</button>;
+};
 
 export default Buttons;

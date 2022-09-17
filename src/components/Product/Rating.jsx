@@ -1,17 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Rating extends Component {
-  render() {
-    const { rate, count } = this.props.rating;
-
-    return (
-      <>
-        <p>
-          Rating: {rate} from {count} users
-        </p>
-      </>
-    );
-  }
-}
+const Rating = (props) => {
+  const { rate, count } = props;
+  return (
+    <>
+      <p>
+        Rating: {rate} from {count} users
+      </p>
+    </>
+  );
+};
 
 export default Rating;

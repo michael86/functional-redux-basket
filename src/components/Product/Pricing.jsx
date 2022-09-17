@@ -1,9 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Pricing extends Component {
-  render() {
-    return <p>£{this.props.price.toFixed(2)}</p>;
-  }
-}
+const Pricing = (props) => {
+  return <p>£{props.price.toFixed(2)}</p>;
+};
 
 export default Pricing;

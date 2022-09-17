@@ -1,18 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import Details from "./Product/Details";
 import Pricing from "./Product/Pricing";
 import Rating from "./Product/Rating";
 import Image from "./Product/Image";
 import Buttons from "./Product/Buttons";
 
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { UPDATE_CART } from "../redux/types";
 
-class Product extends Component {
-  render() {
-    const { id, title, price, description, rating, image } = this.props.product;
+const Product = (props) => {
+  const dispatch = useDispatch();
+  const { id, title, price, description, rating, image } = props.product;
 
-    return (
+  return (
+    <>
       <div className="product">
         <div>
           <Details title={title} description={description} image={image} />
@@ -24,7 +25,7 @@ class Product extends Component {
           <Buttons
             id={id}
             onBuyNow={() => {
-              this.props.dispatch({
+              dispatch({
                 type: UPDATE_CART,
                 payload: { id, qty: 1 },
               });
@@ -32,14 +33,8 @@ class Product extends Component {
           />
         </div>
       </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    shoppingCartItems: state.shoppingCartItems,
-  };
+    </>
+  );
 };
 
-export default connect(mapStateToProps)(Product);
+export default Product;
